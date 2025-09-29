@@ -70,11 +70,12 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 14, 39, 0.8);
+            background: rgba(10, 14, 39, 0.9);
             backdrop-filter: blur(10px);
             padding: 1.5rem 5%;
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease-in-out;
         }
 
         .nav-content {
@@ -232,6 +233,13 @@
             text-align: center;
             font-size: 2.5rem;
             font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
             margin-bottom: 3rem;
         }
 
@@ -273,14 +281,18 @@
             font-size: 0.95rem;
         }
 
-        .projects-grid {
+        .mvp-section {
+            margin-top: 4rem;
+        }
+
+        .mvp-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .project-card {
+        .mvp-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -289,16 +301,43 @@
             transition: all 0.3s;
         }
 
-        .project-card:hover {
+        .mvp-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 40px rgba(0, 102, 255, 0.2);
+            border-color: var(--secondary);
         }
 
-        .project-content {
+        .mvp-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.2), rgba(124, 58, 237, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mvp-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .mvp-content {
             padding: 2rem;
         }
 
-        .project-tag {
+        .mvp-tag {
             display: inline-block;
             padding: 0.25rem 0.75rem;
             background: rgba(0, 102, 255, 0.2);
@@ -308,83 +347,151 @@
             color: var(--secondary);
         }
 
-        .project-title {
-            font-size: 1.25rem;
+        .mvp-title {
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
-        .project-description {
+        .mvp-description {
             color: var(--gray);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
-        .project-metrics {
+        .mvp-metrics {
             display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
 
         .metric {
             font-size: 0.85rem;
             color: var(--secondary);
+            font-weight: 600;
         }
 
-        .experience-timeline {
-            position: relative;
-            margin-top: 3rem;
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            position: relative;
+        .tech-badge {
+            padding: 0.4rem 0.9rem;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--secondary);
         }
 
-        .timeline-content {
+        .experience-section {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6rem 0;
+        }
+
+        .experience-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            transition: all 0.3s;
         }
 
-        .timeline-date {
+        .experience-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 102, 255, 0.15);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .experience-title-group {
+            flex: 1;
+        }
+
+        .experience-role {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
             color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-date {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .experience-projects {
+            margin-top: 2rem;
+        }
+
+        .experience-projects-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .project-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .project-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .project-item-title {
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .timeline-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-company {
+        .project-item-description {
             color: var(--gray);
             margin-bottom: 1rem;
+            line-height: 1.6;
         }
 
-        .timeline-highlights {
+        .project-item-achievements {
             list-style: none;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
         }
 
-        .timeline-highlights li {
+        .project-item-achievements li {
             padding-left: 1.5rem;
             position: relative;
             margin-bottom: 0.5rem;
             color: var(--gray);
+            font-size: 0.95rem;
         }
 
-        .timeline-highlights li::before {
+        .project-item-achievements li::before {
             content: '▹';
             position: absolute;
             left: 0;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .contact-section {
@@ -440,7 +547,21 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 768px) {
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(124, 58, 237, 0.15));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 968px) {
             .hero-content {
                 grid-template-columns: 1fr;
             }
@@ -457,26 +578,32 @@
                 display: none;
             }
 
-            .timeline-item {
+            .mvp-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
             }
         }
 
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
+        .demo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
             margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.3s;
         }
 
-        .tech-badge {
-            padding: 0.5rem 1rem;
-            background: rgba(0, 102, 255, 0.1);
-            border: 1px solid rgba(0, 102, 255, 0.3);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--secondary);
+        .demo-link:hover {
+            background: var(--primary);
+            color: white;
         }
     </style>
 </head>
@@ -488,8 +615,8 @@
             <div class="logo">NAK</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#mvp">MVP Projects</a></li>
                 <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -501,23 +628,23 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Nabeel Ahmed Khan<br><span class="gradient-text">AI Engineer</span></h1>
-                    <p>Computer Vision & Parallel Computing Specialist | Delivering GPU-accelerated deep learning solutions that drive 40% faster inference and 30% improved training efficiency</p>
+                    <p>Computer Vision & Parallel Computing Specialist | Delivering GPU-accelerated deep learning solutions for industrial, agricultural, and scientific applications</p>
                     <div class="cta-buttons">
                         <a href="#contact" class="btn btn-primary">Let's Collaborate</a>
                         <a href="https://github.com/nbeeeel" target="_blank" class="btn btn-secondary">View GitHub</a>
                     </div>
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-number">12</div>
-                            <div class="stat-label">Publications</div>
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Completed Projects</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">Production MVPs</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-number">117</div>
-                            <div class="stat-label">Citations</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">99%</div>
-                            <div class="stat-label">Segmentation Accuracy</div>
+                            <div class="stat-label">Research Citations</div>
                         </div>
                     </div>
                 </div>
@@ -538,6 +665,153 @@
                             <div class="card-title">Computer Vision</div>
                             <div class="card-description">YOLO, SAM, Segmentation Models</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mvp" class="mvp-section">
+        <div class="container">
+            <h2 class="section-title">Production-Ready <span class="gradient-text">MVP Projects</span></h2>
+            <p class="section-subtitle">Six flagship solutions delivering real-world impact across multiple industries</p>
+            
+            <div class="mvp-grid">
+                <!-- MVP 1: Cow Analyzer -->
+                <div class="mvp-card">
+                    <div class="mvp-image">🐄</div>
+                    <div class="mvp-content">
+                        <span class="mvp-tag">Livestock Analytics</span>
+                        <h3 class="mvp-title">Intelligent Cow Breed Analyzer</h3>
+                        <div class="image-placeholder">Project Demo Video/Image Placeholder</div>
+                        <p class="mvp-description">Advanced YOLOv9-based classification system integrating visual recognition with phenotypical analysis for accurate breed identification. Developed in collaboration with Pakistan's Ministry of Livestock to modernize cattle management and breeding programs.</p>
+                        <div class="mvp-metrics">
+                            <span class="metric">✓ 95% Classification Accuracy</span>
+                            <span class="metric">✓ 15% Performance Improvement</span>
+                            <span class="metric">✓ Real-time Processing</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">YOLOv9</span>
+                            <span class="tech-badge">Attention Mechanisms</span>
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">OpenCV</span>
+                        </div>
+                        <a href="#" class="demo-link">📹 View Demo</a>
+                    </div>
+                </div>
+
+                <!-- MVP 2: Rice Grain System -->
+                <div class="mvp-card">
+                    <div class="mvp-image">🌾</div>
+                    <div class="mvp-content">
+                        <span class="mvp-tag">Agricultural Technology</span>
+                        <h3 class="mvp-title">Rice Grain Segmentation & Classification System</h3>
+                        <div class="image-placeholder">Project Demo Video/Image Placeholder</div>
+                        <p class="mvp-description">Industrial-grade CUDA-accelerated pipeline for Alkaram Rice Engineering with 10 Million PKR funding. Features real-time grain analysis on NVIDIA Jetson with FPGA integration for high-throughput color sorting and quality assessment operations.</p>
+                        <div class="mvp-metrics">
+                            <span class="metric">✓ 92% Segmentation Accuracy</span>
+                            <span class="metric">✓ 40% Reduced Inference Time</span>
+                            <span class="metric">✓ 10M PKR Project Value</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">CUDA</span>
+                            <span class="tech-badge">NVIDIA Jetson</span>
+                            <span class="tech-badge">FPGA</span>
+                            <span class="tech-badge">Computer Vision</span>
+                        </div>
+                        <a href="#" class="demo-link">📹 View Demo</a>
+                    </div>
+                </div>
+
+                <!-- MVP 3: Isometric Extractor -->
+                <div class="mvp-card">
+                    <div class="mvp-image">📐</div>
+                    <div class="mvp-content">
+                        <span class="mvp-tag">Design Automation</span>
+                        <h3 class="mvp-title">AI-Powered Isometric Drawing Extractor</h3>
+                        <div class="image-placeholder">Project Demo Video/Image Placeholder</div>
+                        <p class="mvp-description">Automated U-Net autoencoder system for extracting clean isometric designs from complex images while intelligently removing extraneous details. Published as PyPI package enabling 20% faster processing for architects and designers worldwide.</p>
+                        <div class="mvp-metrics">
+                            <span class="metric">✓ 20% Processing Efficiency Gain</span>
+                            <span class="metric">✓ Published on PyPI</span>
+                            <span class="metric">✓ Automated Workflow</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">U-Net</span>
+                            <span class="tech-badge">Autoencoder</span>
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">Python Package</span>
+                        </div>
+                        <a href="#" class="demo-link">📹 View Demo</a>
+                    </div>
+                </div>
+
+                <!-- MVP 4: Defect Segmentation -->
+                <div class="mvp-card">
+                    <div class="mvp-image">🛩️</div>
+                    <div class="mvp-content">
+                        <span class="mvp-tag">Aerospace Engineering</span>
+                        <h3 class="mvp-title">Physics-Informed Defect Segmentation System</h3>
+                        <div class="image-placeholder">Project Demo Video/Image Placeholder</div>
+                        <p class="mvp-description">State-of-the-art Vision Mamba-based U-Net for non-destructive testing of aerospace composites using Optical Pulse Thermography. Integrates thermographic physics principles with deep learning for unprecedented defect detection accuracy in critical applications.</p>
+                        <div class="mvp-metrics">
+                            <span class="metric">✓ 99% mIoU Achieved</span>
+                            <span class="metric">✓ 10% Performance Gain</span>
+                            <span class="metric">✓ Physics-Informed AI</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Vision Mamba</span>
+                            <span class="tech-badge">U-Net</span>
+                            <span class="tech-badge">Thermography</span>
+                            <span class="tech-badge">NDT</span>
+                        </div>
+                        <a href="#" class="demo-link">📹 View Demo</a>
+                    </div>
+                </div>
+
+                <!-- MVP 5: Coral Reef Tracking -->
+                <div class="mvp-card">
+                    <div class="mvp-image">🐠</div>
+                    <div class="mvp-content">
+                        <span class="mvp-tag">Marine Conservation</span>
+                        <h3 class="mvp-title">Enhanced Coral Reef Focal Fish Tracking</h3>
+                        <div class="image-placeholder">Project Demo Video/Image Placeholder</div>
+                        <p class="mvp-description">Advanced SAM2-based tracking system with Kalman filtering and Lucas-Kanade optical flow for autonomous underwater fish behavior analysis. Developed for University of Colorado Boulder's Coral Reef Digital Twin project with 50% reduction in manual interventions.</p>
+                        <div class="mvp-metrics">
+                            <span class="metric">✓ 97% Tracking Accuracy</span>
+                            <span class="metric">✓ 50% Fewer Manual Interventions</span>
+                            <span class="metric">✓ 20% Improved Precision</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">SAM2</span>
+                            <span class="tech-badge">Kalman Filter</span>
+                            <span class="tech-badge">Optical Flow</span>
+                            <span class="tech-badge">OpenCV</span>
+                        </div>
+                        <a href="#" class="demo-link">📹 View Demo</a>
+                    </div>
+                </div>
+
+                <!-- MVP 6: Teeth Defect Detection -->
+                <div class="mvp-card">
+                    <div class="mvp-image">🦷</div>
+                    <div class="mvp-content">
+                        <span class="mvp-tag">Medical Imaging</span>
+                        <h3 class="mvp-title">Intelligent Dental Defect Detection Application</h3>
+                        <div class="image-placeholder">Project Demo Video/Image Placeholder</div>
+                        <p class="mvp-description">Clinical-grade deep learning application for automated detection and classification of dental defects from radiographic images. Features intuitive GUI for dentists with real-time analysis capabilities and comprehensive diagnostic reporting functionality.</p>
+                        <div class="mvp-metrics">
+                            <span class="metric">✓ Clinical-Grade Accuracy</span>
+                            <span class="metric">✓ Real-time Analysis</span>
+                            <span class="metric">✓ User-Friendly Interface</span>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Deep Learning</span>
+                            <span class="tech-badge">Medical Imaging</span>
+                            <span class="tech-badge">GUI Application</span>
+                            <span class="tech-badge">TensorFlow</span>
+                        </div>
+                        <a href="#" class="demo-link">📹 View Demo</a>
                     </div>
                 </div>
             </div>
@@ -582,160 +856,183 @@
         </div>
     </section>
 
-    <section id="projects">
+    <section id="experience" class="experience-section">
         <div class="container">
-            <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-tag">Aerospace</span>
-                        <h3 class="project-title">Defect Segmentation in Aerospace Composites</h3>
-                        <p class="project-description">Vision Mamba-based U-Net for IR image defect segmentation with physics-based thermographic principles</p>
-                        <div class="project-metrics">
-                            <span class="metric">✓ 99% mIoU</span>
-                            <span class="metric">✓ 10% Performance Gain</span>
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Vision Mamba</span>
-                            <span class="tech-badge">U-Net</span>
-                            <span class="tech-badge">PyTorch</span>
-                        </div>
+            <h2 class="section-title">Professional <span class="gradient-text">Experience</span></h2>
+            
+            <!-- Research Associate -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title-group">
+                        <h3 class="experience-role">Research Associate</h3>
+                        <div class="experience-company">Center of AI & Big Data, Namal University</div>
+                        <div class="experience-date">November 2024 – Present | Mianwali, Pakistan</div>
                     </div>
                 </div>
+                
+                <div class="experience-projects">
+                    <h4 class="experience-projects-title">Key Projects & Achievements</h4>
+                    <div class="project-list">
+                        <div class="project-item">
+                            <h5 class="project-item-title">Rice Grain Segmentation & Classification System</h5>
+                            <div class="image-placeholder">Project Visualization Placeholder</div>
+                            <p class="project-item-description">Led development of industrial-scale CUDA-accelerated pipeline for Alkaram Rice Engineering, securing 10 Million PKR funding. Implemented real-time segmentation and classification on NVIDIA Jetson with FPGA integration for high-throughput grain sorting operations.</p>
+                            <ul class="project-item-achievements">
+                                <li>Achieved 92% segmentation accuracy with custom deep learning architecture</li>
+                                <li>Reduced inference time by 40% through CUDA parallel processing optimization</li>
+                                <li>Deployed edge computing solution combining Jetson and FPGA for cost-effective industrial deployment</li>
+                                <li>Designed real-time color sorting mechanism for quality assessment</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">CUDA</span>
+                                <span class="tech-badge">NVIDIA Jetson</span>
+                                <span class="tech-badge">FPGA</span>
+                                <span class="tech-badge">PyTorch</span>
+                            </div>
+                        </div>
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-tag">Agriculture</span>
-                        <h3 class="project-title">Rice Grain Segmentation System</h3>
-                        <p class="project-description">CUDA-accelerated pipeline for Alkaram Rice Engineering with 10M PKR funding for industrial deployment</p>
-                        <div class="project-metrics">
-                            <span class="metric">✓ 92% Accuracy</span>
-                            <span class="metric">✓ 40% Faster Inference</span>
+                        <div class="project-item">
+                            <h5 class="project-item-title">Intelligent Cow Breed Analyzer</h5>
+                            <div class="image-placeholder">Project Visualization Placeholder</div>
+                            <p class="project-item-description">Developed advanced breed classification system for Pakistan Ministry of Livestock using modified YOLOv9 architecture with attention mechanisms. Integrated visual recognition with phenotypical feature analysis for comprehensive breed identification.</p>
+                            <ul class="project-item-achievements">
+                                <li>Boosted classification accuracy to 95% with custom attention modules</li>
+                                <li>Achieved 15% performance improvement over baseline YOLOv9</li>
+                                <li>Integrated phenotypical data analysis with computer vision for robust predictions</li>
+                                <li>Created scalable solution for national livestock management programs</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">YOLOv9</span>
+                                <span class="tech-badge">Attention Mechanisms</span>
+                                <span class="tech-badge">PyTorch</span>
+                                <span class="tech-badge">Computer Vision</span>
+                            </div>
                         </div>
-                        <div class="tech-stack">
-                            <span class="tech-badge">CUDA</span>
-                            <span class="tech-badge">NVIDIA Jetson</span>
-                            <span class="tech-badge">FPGA</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-tag">Marine Biology</span>
-                        <h3 class="project-title">Underwater Fish Tracking Pipeline</h3>
-                        <p class="project-description">Autonomous mask prompt pipeline with SAM2 for Coral Reef Digital Twin project</p>
-                        <div class="project-metrics">
-                            <span class="metric">✓ 97% Tracking Accuracy</span>
-                            <span class="metric">✓ 50% Fewer Interventions</span>
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-badge">SAM2</span>
-                            <span class="tech-badge">Kalman Filter</span>
-                            <span class="tech-badge">OpenCV</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-tag">Livestock</span>
-                        <h3 class="project-title">Cow Breed Classification</h3>
-                        <p class="project-description">Modified YOLOv9 with attention mechanisms for phenotypic classification, Ministry of Livestock collaboration</p>
-                        <div class="project-metrics">
-                            <span class="metric">✓ 95% Accuracy</span>
-                            <span class="metric">✓ 15% Improvement</span>
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-badge">YOLOv9</span>
-                            <span class="tech-badge">Attention Modules</span>
-                            <span class="tech-badge">PyTorch</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-tag">Medical Imaging</span>
-                        <h3 class="project-title">GPU-Accelerated Medical Image Segmentation</h3>
-                        <p class="project-description">Open-source U-Net implementation with CUDA and OpenACC for real-time medical diagnosis</p>
-                        <div class="project-metrics">
-                            <span class="metric">✓ 50% Faster</span>
-                            <span class="metric">✓ Open Source</span>
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-badge">U-Net</span>
-                            <span class="tech-badge">CUDA</span>
-                            <span class="tech-badge">OpenACC</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <span class="project-tag">HPC</span>
-                        <h3 class="project-title">Distributed Deep Learning Framework</h3>
-                        <p class="project-description">Open-source implementation using Horovod and CUDA for multi-GPU training optimization</p>
-                        <div class="project-metrics">
-                            <span class="metric">✓ 25% Faster Training</span>
-                            <span class="metric">✓ Multi-GPU Support</span>
-                        </div>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Horovod</span>
-                            <span class="tech-badge">MPI</span>
-                            <span class="tech-badge">CUDA</span>
+                        <div class="project-item">
+                            <h5 class="project-item-title">Distributed AI Model Hosting Services</h5>
+                            <div class="image-placeholder">Infrastructure Diagram Placeholder</div>
+                            <p class="project-item-description">Configured and optimized 20-node HPC cluster for distributed training and inference of vision and language models. Implemented SLURM job scheduling with Grafana monitoring for efficient resource utilization.</p>
+                            <ul class="project-item-achievements">
+                                <li>Improved training efficiency by 30% through distributed computing optimization</li>
+                                <li>Configured SLURM scheduling system for multi-user research environment</li>
+                                <li>Implemented Grafana dashboards for real-time cluster monitoring</li>
+                                <li>Established CI/CD pipelines for automated model deployment</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">SLURM</span>
+                                <span class="tech-badge">Grafana</span>
+                                <span class="tech-badge">HPC</span>
+                                <span class="tech-badge">Kubernetes</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Professional <span class="gradient-text">Experience</span></h2>
-            <div class="experience-timeline">
-                <div class="timeline-item">
-                    <div></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">November 2024 – Present</div>
-                        <h3 class="timeline-title">Research Associate</h3>
-                        <div class="timeline-company">Center of AI & Big Data, Namal University</div>
-                        <ul class="timeline-highlights">
-                            <li>Configured 20-node HPC cluster with SLURM and Grafana for 30% training efficiency improvement</li>
-                            <li>Optimized rice grain segmentation with CUDA, achieving 40% inference time reduction</li>
-                            <li>Developed custom YOLOv9-based cow breed analyzer with 15% accuracy boost</li>
-                            <li>Leading low-cost rice color sorting machine project using NVIDIA Jetson and FPGA</li>
-                        </ul>
+            <!-- Research Technician -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title-group">
+                        <h3 class="experience-role">Research Technician</h3>
+                        <div class="experience-company">University of Colorado Boulder</div>
+                        <div class="experience-date">July 2023 – November 2024 | Remote, United States</div>
                     </div>
                 </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">July 2023 – November 2024</div>
-                        <h3 class="timeline-title">Research Technician</h3>
-                        <div class="timeline-company">University of Colorado Boulder (Remote)</div>
-                        <ul class="timeline-highlights">
-                            <li>Built automated coral reef fish tracking pipeline, reducing manual interventions by 50%</li>
-                            <li>Enhanced SAM tracking with Kalman filtering for 20% accuracy improvement</li>
-                            <li>Developed GUI for fish behavior analysis to streamline ecological data interpretation</li>
-                            <li>Optimized vision workflows with NVIDIA Nsight for 20% throughput increase</li>
-                        </ul>
+                
+                <div class="experience-projects">
+                    <h4 class="experience-projects-title">Key Projects & Achievements</h4>
+                    <div class="project-list">
+                        <div class="project-item">
+                            <h5 class="project-item-title">Coral Reef Digital Twin - Focal Fish Tracking System</h5>
+                            <div class="image-placeholder">Project Visualization Placeholder</div>
+                            <p class="project-item-description">Built comprehensive automated pipeline for coral reef fish tracking using enhanced SAM2 with Kalman filtering and Lucas-Kanade optical flow. Developed autonomous mask prompt generation system for continuous underwater fish behavior monitoring.</p>
+                            <ul class="project-item-achievements">
+                                <li>Achieved 97% tracking accuracy in challenging underwater environments</li>
+                                <li>Reduced manual interventions by 50% through autonomous mask prompting</li>
+                                <li>Enhanced SAM2 tracking precision by 20% with Kalman filtering integration</li>
+                                <li>Improved fish movement detection by 15% through international collaboration</li>
+                                <li>Optimized vision workflows using NVIDIA Nsight for 20% throughput increase</li>
+                                <li>Developed intuitive GUI for ecological data interpretation and analysis</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">SAM2</span>
+                                <span class="tech-badge">Kalman Filter</span>
+                                <span class="tech-badge">Optical Flow</span>
+                                <span class="tech-badge">NVIDIA Nsight</span>
+                                <span class="tech-badge">OpenCV</span>
+                            </div>
+                        </div>
                     </div>
-                    <div></div>
                 </div>
+            </div>
 
-                <div class="timeline-item">
-                    <div></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">2025</div>
-                        <h3 class="timeline-title">Collaborative Researcher</h3>
-                        <div class="timeline-company">University of Electronic Science and Technology of China (UESTC)</div>
-                        <ul class="timeline-highlights">
-                            <li>Developed Vision Mamba-based U-Net for aerospace composite defect segmentation</li>
-                            <li>Achieved 99% mIoU through physics-based thermographic principles integration</li>
-                            <li>Collaborated on cutting-edge non-destructive testing methodologies</li>
-                        </ul>
+            <!-- Freelance Collaborations -->
+            <div class="experience-card">
+                <div class="experience-header">
+                    <div class="experience-title-group">
+                        <h3 class="experience-role">Freelance AI Engineer & Research Collaborator</h3>
+                        <div class="experience-company">Multiple International Clients</div>
+                        <div class="experience-date">2023 – Present | Remote</div>
+                    </div>
+                </div>
+                
+                <div class="experience-projects">
+                    <h4 class="experience-projects-title">Featured Collaborations</h4>
+                    <div class="project-list">
+                        <div class="project-item">
+                            <h5 class="project-item-title">AI-Powered Isometric Drawing Extractor</h5>
+                            <div class="image-placeholder">Project Visualization Placeholder</div>
+                            <p class="project-item-description">Developed automated U-Net autoencoder system for extracting clean isometric designs from complex images. Published as production-ready PyPI package enabling architects and designers to automate tedious extraction workflows.</p>
+                            <ul class="project-item-achievements">
+                                <li>Published as 'ai-isometric-extractor' package on PyPI</li>
+                                <li>Increased processing efficiency by 20% over manual methods</li>
+                                <li>Implemented intelligent extraneous detail removal algorithms</li>
+                                <li>Created user-friendly API for seamless integration</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">U-Net</span>
+                                <span class="tech-badge">Autoencoder</span>
+                                <span class="tech-badge">PyTorch</span>
+                                <span class="tech-badge">Python Package</span>
+                            </div>
+                        </div>
+
+                        <div class="project-item">
+                            <h5 class="project-item-title">Dental Defect Detection Application</h5>
+                            <div class="image-placeholder">Application Interface Placeholder</div>
+                            <p class="project-item-description">Engineered clinical-grade deep learning application for automated dental defect detection and classification from radiographic images. Features real-time analysis with comprehensive diagnostic reporting for dental practitioners.</p>
+                            <ul class="project-item-achievements">
+                                <li>Developed clinical-grade detection accuracy for multiple defect types</li>
+                                <li>Created intuitive GUI for seamless clinical workflow integration</li>
+                                <li>Implemented real-time analysis with sub-second inference times</li>
+                                <li>Designed comprehensive diagnostic reporting system</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Deep Learning</span>
+                                <span class="tech-badge">Medical Imaging</span>
+                                <span class="tech-badge">TensorFlow</span>
+                                <span class="tech-badge">GUI Development</span>
+                            </div>
+                        </div>
+
+                        <div class="project-item">
+                            <h5 class="project-item-title">Physics-Informed Defect Segmentation (UESTC Collaboration)</h5>
+                            <div class="image-placeholder">Research Results Placeholder</div>
+                            <p class="project-item-description">Collaborated with University of Electronic Science and Technology of China on state-of-the-art Vision Mamba-based U-Net for aerospace composite defect segmentation. Integrated physics-based thermographic principles for non-destructive testing applications.</p>
+                            <ul class="project-item-achievements">
+                                <li>Achieved 99% mIoU on Optical Pulse Thermography IR images</li>
+                                <li>Realized 10% performance gain over existing state-of-the-art methods</li>
+                                <li>Integrated thermographic physics principles with deep learning architecture</li>
+                                <li>Published research findings in collaboration with UESTC researchers</li>
+                            </ul>
+                            <div class="tech-stack">
+                                <span class="tech-badge">Vision Mamba</span>
+                                <span class="tech-badge">U-Net</span>
+                                <span class="tech-badge">Physics-Informed AI</span>
+                                <span class="tech-badge">Thermography</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -746,10 +1043,13 @@
         <div class="container">
             <div class="contact-section">
                 <h2 class="contact-title">Let's Build Something <span class="gradient-text">Amazing</span></h2>
-                <p class="contact-description">Available for freelance projects, research collaborations, and consulting opportunities in computer vision and AI</p>
+                <p class="contact-description">Available for freelance projects, research collaborations, and consulting opportunities in computer vision, deep learning, and high-performance computing</p>
                 <div class="contact-methods">
                     <a href="mailto:nbeel.original@gmail.com" class="contact-link">
                         📧 nbeel.original@gmail.com
+                    </a>
+                    <a href="tel:+923339155986" class="contact-link">
+                        📱 +92 333-9155986
                     </a>
                     <a href="https://github.com/nbeeeel" target="_blank" class="contact-link">
                         💻 GitHub
@@ -760,6 +1060,9 @@
                     <a href="https://scholar.google.com/citations?user=kjpRJY4AAAAJ" target="_blank" class="contact-link">
                         🎓 Google Scholar
                     </a>
+                    <a href="https://researchgate.net/profile/Nabeel-Khan-47" target="_blank" class="contact-link">
+                        🔬 ResearchGate
+                    </a>
                 </div>
                 <div class="tech-stack" style="justify-content: center; margin-top: 3rem;">
                     <span class="tech-badge">Python</span>
@@ -769,11 +1072,13 @@
                     <span class="tech-badge">TensorFlow</span>
                     <span class="tech-badge">YOLOv9</span>
                     <span class="tech-badge">Vision Transformers</span>
+                    <span class="tech-badge">SAM2</span>
                     <span class="tech-badge">MPI</span>
                     <span class="tech-badge">OpenMP</span>
                     <span class="tech-badge">Docker</span>
                     <span class="tech-badge">Kubernetes</span>
                     <span class="tech-badge">AWS</span>
+                    <span class="tech-badge">TensorRT</span>
                 </div>
             </div>
         </div>
@@ -781,7 +1086,9 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Nabeel Ahmed Khan. All rights reserved. | Registered Professional Engineer (PEC Reg # ELECT/101054)</p>
+            <p>&copy; 2025 Nabeel Ahmed Khan. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Registered Professional Engineer | Pakistan Engineering Council (Reg # ELECT/101054)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem;">12 Publications | 117 Citations | h-index: 5</p>
         </div>
     </footer>
 
@@ -810,7 +1117,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.expertise-card, .project-card, .timeline-content').forEach(el => {
+        document.querySelectorAll('.expertise-card, .mvp-card, .experience-card, .project-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease-out';
@@ -833,5 +1140,6 @@
             
             lastScroll = currentScroll;
         });
-
-        nav.style.transition = 'transform 0.3s ease-in-out';
+    </script>
+</body>
+</html>
